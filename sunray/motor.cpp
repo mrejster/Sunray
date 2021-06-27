@@ -14,7 +14,7 @@
 
 void Motor::begin() {
 	pwmMax = 255;
-  pwmMaxMow = 255;
+  pwmMaxMow = 220;
 
   //ticksPerRevolution = 1060/2;
   ticksPerRevolution = TICKS_PER_REVOLUTION;
@@ -30,12 +30,8 @@ void Motor::begin() {
   motorRightPID.Kd       = motorLeftPID.Kd;		 
 
   robotPitch = 0;
-  #ifdef MOTOR_DRIVER_BRUSHLESS
-    motorLeftSwapDir = true;
-  #else
-    motorLeftSwapDir = false;  
-  #endif
-  motorRightSwapDir = false;
+  motorLeftSwapDir = true; // Erik 2021-05-23
+  motorRightSwapDir = true; // Erik 2021-05-23
   motorError = false;
   resetMotorFault = false;
   resetMotorFaultCounter = 0;
@@ -506,5 +502,3 @@ void Motor::plot(){
   speedPWM(0, 0, 0);
   CONSOLE.println("motor plot done - please ignore any IMU/GPS errors");
 }
-
-

@@ -81,10 +81,14 @@ void AmMotorDriver::begin(){
   pinMode(pinMotorMowDir, OUTPUT);
   pinMode(pinMotorMowPWM, OUTPUT);
   pinMode(pinMotorMowSense, INPUT);
+  pinMode(pinMotorMowSenseLeft, INPUT);
+  pinMode(pinMotorMowSenseRight, INPUT);
   //pinMode(pinMotorMowRpm, INPUT);
   pinMode(pinMotorMowEnable, OUTPUT);
   digitalWrite(pinMotorMowEnable, enableActive);
   pinMode(pinMotorMowFault, INPUT);
+  pinMode(pinMotorMowFaultLeft, INPUT);
+  pinMode(pinMotorMowFaultRight, INPUT);
 
   // odometry
   pinMode(pinOdometryLeft, INPUT_PULLUP);
@@ -164,7 +168,8 @@ void AmMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowF
   if  (digitalRead(pinMotorRightFault) == faultActive) {
     rightFault = true;
   }
-  if (digitalRead(pinMotorMowFault) == faultActive) {
+  //if ((digitalRead(pinMotorMowFault) == faultActive) || (digitalRead(pinMotorMowFaultLeft) == faultActive) || (digitalRead(pinMotorMowFaultRight) == faultActive)) {
+    if (digitalRead(pinMotorMowFault) == faultActive){
     mowFault = true;
   }
 }
@@ -178,7 +183,8 @@ void AmMotorDriver::resetMotorFaults(){
     digitalWrite(pinMotorEnable, !enableActive);
     digitalWrite(pinMotorEnable, enableActive);
   }
-  if (digitalRead(pinMotorMowFault) == faultActive) {
+  //if ((digitalRead(pinMotorMowFault) == faultActive) || (digitalRead(pinMotorMowFaultLeft) == faultActive) || (digitalRead(pinMotorMowFaultRight) == faultActive)) {
+    if (digitalRead(pinMotorMowFault) == faultActive) {
     digitalWrite(pinMotorMowEnable, !enableActive);
     digitalWrite(pinMotorMowEnable, enableActive);
   }
@@ -195,7 +201,9 @@ void AmMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, flo
       float scale       = 1.905;   // ADC voltage to amp      
       leftCurrent = ((float)ADC2voltage(analogRead(pinMotorRightSense))) *scale;
       rightCurrent = ((float)ADC2voltage(analogRead(pinMotorLeftSense))) *scale;
-      mowCurrent = ((float)ADC2voltage(analogRead(pinMotorMowSense))) *scale  *2;	          
+      mowCurrent = ((float)ADC2voltage(analogRead(pinMotorMowSense))) *scale  *2;
+      //mowCurrentLeft = ((float)ADC2voltage(analogRead(pinMotorMowSenseLeft))) *scale  *2;
+      //mowCurrentRight = ((float)ADC2voltage(analogRead(pinMotorMowSenseRight))) *scale  *2;	          
     #endif
 }
 
@@ -281,11 +289,13 @@ void AmBatteryDriver::keepPowerOn(bool flag){
 
 // ------------------------------------------------------------------------------------
 void BumperLeftInterruptRoutine(){
-  leftPressed = (digitalRead(pinBumperLeft) == LOW);  
+  //leftPressed = (digitalRead(pinBumperLeft) == LOW);  
+  leftPressed = (digitalRead(pinBumperLeft) == HIGH);  //Erik 2021-05-23
 }
 
 void BumperRightInterruptRoutine(){
-  rightPressed = (digitalRead(pinBumperRight) == LOW);  
+  //rightPressed = (digitalRead(pinBumperRight) == LOW);  
+  rightPressed = (digitalRead(pinBumperRight) == HIGH);   //Erik 2021-05-23
 }
 
 

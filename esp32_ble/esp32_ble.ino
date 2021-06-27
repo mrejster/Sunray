@@ -47,7 +47,7 @@ connect to wifi               AT+WIFImode,ssid,pass\r\n       +WIFI=mode,ssid,pa
 #define BLE_LATENCY      0
 #define BLE_TIMEOUT      20  
       
-String ssid = "";  // WiFi SSID      (leave empty to not use WiFi)
+String ssid = "kjeb";  // WiFi SSID      (leave empty to not use WiFi)
 String pass = "";  // WiFi password  (leave empty to not use WiFi)
 
 #define WIFI_TIMEOUT_FIRST_RESPONSE  500   // fast response times, for more reliable choose: 800     
@@ -250,7 +250,7 @@ void startBLE(){
 // ------------------------------- wifi -----------------------------------------------------
 
 void startWIFI(){
-  if ((ssid == "") || (pass == "")) return;
+  if ((ssid == "")) return;
   if ((WiFi.status() != WL_CONNECTED) || (WiFi.localIP().toString() == "0.0.0.0")) {    
     CONSOLE.print("Attempting to connect to WPA SSID: ");
     CONSOLE.println(ssid);
@@ -466,7 +466,7 @@ void setup() {
   CONSOLE.println(VERSION);
 
   startBLE();
-  //startWIFI();
+  startWIFI();
 }
 
 
@@ -578,5 +578,3 @@ void loop() {
   ArduinoOTA.handle();
 
 }
-
-
