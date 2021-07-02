@@ -53,6 +53,7 @@ class AmBatteryDriver : public BatteryDriver {
   protected:
   	float batteryFactor;
     float currentFactor;
+    float currentOffset;
 };
 
 class AmBumperDriver: public BumperDriver {

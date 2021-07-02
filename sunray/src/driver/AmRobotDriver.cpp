@@ -249,7 +249,9 @@ void AmBatteryDriver::begin(){
   //   a) bridged      RL=6.8K:   Is = 1V * 1k / (0.05*6.8K)  = 2.941A
   //   b) non-bridged  RL=10.1k:  Is = 1V * 1k / (0.05*10.1K)  = 1.98A
   
-  currentFactor = CURRENT_FACTOR;         // ADC voltage to current ampere  (0.5 for non-bridged)
+  //currentFactor = CURRENT_FACTOR;         // ADC voltage to current ampere  (0.5 for non-bridged)
+  currentFactor = 11.63;                    // ADC voltage to current ampere, voltage divider 5->3.3V on ACS712
+  currentOffset = 1.621;                    // ADC voltage offset, voltage divider 5->3.3V on ACS712
 
   pinMode(pinChargeRelay, OUTPUT);
   pinMode(pinBatteryVoltage, INPUT);
@@ -274,7 +276,8 @@ float AmBatteryDriver::getChargeVoltage(){
 
 
 float AmBatteryDriver::getChargeCurrent(){    
-  float amps = ((float)ADC2voltage(analogRead(pinChargeCurrent))) * currentFactor;    
+  //float amps = ((float)ADC2voltage(analogRead(pinChargeCurrent))) * currentFactor;    
+  float amps = ((float)ADC2voltage(analogRead(pinChargeCurrent))-currentOffset) * currentFactor;    
 	return amps;
 }
 

@@ -175,14 +175,14 @@ Also, you may choose the serial port below for serial monitor output (CONSOLE).
 
 // a relay server allows to access the robot via the Internet by transferring data from app to robot and vice versa (not available yet, highly experimental)
 // client (app) --->  relay server  <--- client (robot)
-#define ENABLE_RELAY false            // must be enabled to use relay server
-#define RELAY_USER "username"         // choose a unique user name/number!
-#define RELAY_MACHINE "klopp"        // choose a unique robot id
-#define RELAY_HOST "grauonline.net"   // relay server name
-#define RELAY_PORT 5000               // relay server port 
+#define ENABLE_RELAY false             // must be enabled to use relay server
+#define RELAY_USER "username"          // choose a unique user name/number!
+#define RELAY_MACHINE "klopp"          // choose a unique robot id
+#define RELAY_HOST "grauonline.net"    // relay server name
+#define RELAY_PORT 5000                // relay server port 
 
-//#define ENABLE_UDP 1                // enable console for UDP? (for developers only)
-#define UDP_SERVER_IP   192,168,2,56     // remote UDP IP and port to connect to
+#define ENABLE_UDP 1                   // enable console for UDP? (for developers only)
+#define UDP_SERVER_IP   192,168,1,202  // remote UDP IP and port to connect to
 #define UDP_SERVER_PORT 4210
 
 // --------- NTRIP client (linux only, highly experimental) ---------------------------------
