@@ -14,7 +14,7 @@
 
 void Motor::begin() {
 	pwmMax = 255;
-  pwmMaxMow = 220;
+  pwmMaxMow = 230;
 
   //ticksPerRevolution = 1060/2;
   ticksPerRevolution = TICKS_PER_REVOLUTION;
