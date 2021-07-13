@@ -213,7 +213,7 @@ void SerialMotorDriver::setMotorPwm(int leftPwm, int rightPwm, int mowPwm){
   serialRobot.requestMotorPwm(leftPwm, rightPwm, mowPwm);
 }
 
-void SerialMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault){
+void SerialMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault, bool &mowFaultLeft, bool &mowFaultRight){
   leftFault = serialRobot.motorFault;
   rightFault = serialRobot.motorFault;
   if (serialRobot.motorFault){
@@ -225,7 +225,7 @@ void SerialMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &
 void SerialMotorDriver::resetMotorFaults(){
 }
 
-void SerialMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent) {
+void SerialMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent, float &mowCurrentLeft, float &mowCurrentRight) {
   leftCurrent = 0.5;
   rightCurrent = 0.5;
   mowCurrent = 0.8;

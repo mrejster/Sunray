@@ -87,7 +87,7 @@ Also, you may choose the serial port below for serial monitor output (CONSOLE).
 // https://wiki.ardumower.de/index.php?title=Ardumower_Sunray#SD_card_module
 // https://wiki.ardumower.de/index.php?title=Ardumower_Sunray#SD_card_logging
 #define ENABLE_SD      1                 // enable SD card services (resuming, logging)? (uncomment to activate)
-#define ENABLE_SD_LOG  1                 // enable SD card logging? (uncomment to activate)
+//#define ENABLE_SD_LOG  1                 // enable SD card logging? (uncomment to activate)
 #define ENABLE_SD_RESUME  1              // enable SD card map load/resume on reset? (uncomment to activate)
 
 
@@ -182,7 +182,7 @@ Also, you may choose the serial port below for serial monitor output (CONSOLE).
 #define RELAY_PORT 5000                // relay server port 
 
 #define ENABLE_UDP 1                   // enable console for UDP? (for developers only)
-#define UDP_SERVER_IP   192,168,1,202  // remote UDP IP and port to connect to
+#define UDP_SERVER_IP   192,168,1,200  // remote UDP IP and port to connect to
 #define UDP_SERVER_PORT 4210
 
 // --------- NTRIP client (linux only, highly experimental) ---------------------------------

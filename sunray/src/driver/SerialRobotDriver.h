@@ -52,9 +52,9 @@ class SerialMotorDriver: public MotorDriver {
     void begin() override;
     void run() override;
     void setMotorPwm(int leftPwm, int rightPwm, int mowPwm) override;
-    void getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault) override;
+    void getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault, bool &mowFaultLeft, bool &mowFaultRight) override;
     void resetMotorFaults()  override;
-    void getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent) override;
+    void getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent, float &mowCurrentLeft, float &mowCurrentRight) override;
     void getMotorEncoderTicks(int &leftTicks, int &rightTicks, int &mowTicks) override;
 };
 

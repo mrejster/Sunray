@@ -161,7 +161,7 @@ void AmMotorDriver::setMotorPwm(int leftPwm, int rightPwm, int mowPwm){
 }
 
 
-void AmMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault){ 
+void AmMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault, bool &mowFaultLeft, bool &mowFaultRight){ 
   if (digitalRead(pinMotorLeftFault) == faultActive) {
     leftFault = true;
   }
@@ -171,6 +171,12 @@ void AmMotorDriver::getMotorFaults(bool &leftFault, bool &rightFault, bool &mowF
   //if ((digitalRead(pinMotorMowFault) == faultActive) || (digitalRead(pinMotorMowFaultLeft) == faultActive) || (digitalRead(pinMotorMowFaultRight) == faultActive)) {
     if (digitalRead(pinMotorMowFault) == faultActive){
     mowFault = true;
+  }
+    if (digitalRead(pinMotorMowFaultLeft) == faultActive){
+    mowFaultLeft = true;
+  }
+    if (digitalRead(pinMotorMowFaultRight) == faultActive){
+    mowFaultRight = true;
   }
 }
 
@@ -183,14 +189,22 @@ void AmMotorDriver::resetMotorFaults(){
     digitalWrite(pinMotorEnable, !enableActive);
     digitalWrite(pinMotorEnable, enableActive);
   }
-  //if ((digitalRead(pinMotorMowFault) == faultActive) || (digitalRead(pinMotorMowFaultLeft) == faultActive) || (digitalRead(pinMotorMowFaultRight) == faultActive)) {
     if (digitalRead(pinMotorMowFault) == faultActive) {
+    digitalWrite(pinMotorMowEnable, !enableActive);
+    digitalWrite(pinMotorMowEnable, enableActive);
+  }
+  //Eriks addition for left and right motor (resets all drivers, connected to same pin)
+      if (digitalRead(pinMotorMowFaultLeft) == faultActive) {
+    digitalWrite(pinMotorMowEnable, !enableActive);
+    digitalWrite(pinMotorMowEnable, enableActive);
+  }
+      if (digitalRead(pinMotorMowFaultRight) == faultActive) {
     digitalWrite(pinMotorMowEnable, !enableActive);
     digitalWrite(pinMotorMowEnable, enableActive);
   }
 }
 
-void AmMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent){
+void AmMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent, float &mowCurrentLeft, float &mowCurrentRight){
     float offset      = -1.65;
     #ifdef MOTOR_DRIVER_BRUSHLESS
       float scale       = 7.57;   // ADC voltage to amp      
@@ -202,8 +216,8 @@ void AmMotorDriver::getMotorCurrent(float &leftCurrent, float &rightCurrent, flo
       leftCurrent = ((float)ADC2voltage(analogRead(pinMotorRightSense))) *scale;
       rightCurrent = ((float)ADC2voltage(analogRead(pinMotorLeftSense))) *scale;
       mowCurrent = ((float)ADC2voltage(analogRead(pinMotorMowSense))) *scale  *2;
-      //mowCurrentLeft = ((float)ADC2voltage(analogRead(pinMotorMowSenseLeft))) *scale  *2;
-      //mowCurrentRight = ((float)ADC2voltage(analogRead(pinMotorMowSenseRight))) *scale  *2;	          
+      mowCurrentLeft = ((float)ADC2voltage(analogRead(pinMotorMowSenseLeft))) *scale  *2;
+      mowCurrentRight = ((float)ADC2voltage(analogRead(pinMotorMowSenseRight))) *scale  *2;	          
     #endif
 }
 

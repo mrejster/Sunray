@@ -17,11 +17,11 @@ class MotorDriver {
     // set pwm (0-255), positive: forward, negative: backwards
     virtual void setMotorPwm(int leftPwm, int rightPwm, int mowPwm) = 0;
     // get motor faults
-    virtual void getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault) = 0;
+    virtual void getMotorFaults(bool &leftFault, bool &rightFault, bool &mowFault, bool &mowFaultLeft, bool &mowFaultRight) = 0;
     // reset motor faults
     virtual void resetMotorFaults() = 0;
     // get motor currents (ampere)
-    virtual void getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent) = 0;
+    virtual void getMotorCurrent(float &leftCurrent, float &rightCurrent, float &mowCurrent, float &mowCurrentLeft, float &mowCurrentRight) = 0;
     // get motor encoder ticks
     virtual void getMotorEncoderTicks(int &leftTicks, int &rightTicks, int &mowTicks) = 0; 
 };

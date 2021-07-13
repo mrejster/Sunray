@@ -28,7 +28,9 @@ class Motor {
     bool motorError;
     bool motorLeftOverload; 
     bool motorRightOverload; 
-    bool motorMowOverload; 
+    bool motorMowOverload;
+    bool motorMowLeftOverload;
+    bool motorMowRightOverload; 
     bool enableMowMotor;
     bool odometryError;    
     unsigned long motorOverloadDuration; // accumulated duration (ms)
@@ -40,10 +42,14 @@ class Motor {
     float angularSpeedSet; // rad/s
     float motorLeftSense; // left motor current (amps)
     float motorRightSense; // right  motor current (amps)
-    float motorMowSense;  // mower motor current (amps)         
+    float motorMowSense;  // mower motor current (amps)
+    float motorMowSenseLeft;  // mower motor current (amps)         
+    float motorMowSenseRight;  // mower motor current (amps)
     float motorLeftSenseLP; // left motor current (amps, low-pass)
     float motorRightSenseLP; // right  motor current (amps, low-pass)
-    float motorMowSenseLP;  // mower motor current (amps, low-pass)       
+    float motorMowSenseLP;  // mower motor current (amps, low-pass)
+    float motorMowSenseLeftLP;  // mower motor current (amps, low-pass)
+    float motorMowSenseRightLP;  // mower motor current (amps, low-pass)       
     float motorsSenseLP; // all motors current (amps, low-pass)
     float motorLeftSenseLPNorm; 
     float motorRightSenseLPNorm;
